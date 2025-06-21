@@ -1,13 +1,11 @@
 [build]
-# Railway会自动检测Dockerfile并构建
 
 [deploy]
-# 指定启动命令
 startCommand = "/app/nav"
 
-# 配置持久化卷
-[[volumes]]
-# 卷的名称
-name = "data-volume"
-# 挂载路径
+[env]
+DATA_DIR = "/app/data"
+
+[[volume]]
+name = "data"
 mountPath = "/app/data" 

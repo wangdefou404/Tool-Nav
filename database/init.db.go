@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"os"
 	"path/filepath"
 
 	_ "modernc.org/sqlite"
@@ -24,10 +25,14 @@ func columnExists(tableName string, columnName string) bool {
 
 func InitDB() {
 	var err error
-	utils.PathExistsOrCreate("./data")
+	// 从环境变量读取数据目录，如果没有设置则使用默认值
+	dataDir := os.Getenv("DATA_DIR")
+	if dataDir == "" {
+		dataDir = "./data"
+	}
+	utils.PathExistsOrCreate(dataDir)
 	// 创建数据库
-	dir := "./data"
-	dbPath := filepath.Join(dir, "nav.db")
+	dbPath := filepath.Join(dataDir, "nav.db")
 	// 添加连接参数
 	dbPath = dbPath + "?_journal=WAL&_timeout=5000&_busy_timeout=5000&_txlock=immediate"
 	DB, err = sql.Open("sqlite", dbPath)
