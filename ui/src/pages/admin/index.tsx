@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ExitIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { MenuItem, Sidebar } from './components/sidebar';
+import { Helmet } from 'react-helmet';
 import "./index.css"
 import {
   HomeIcon,
@@ -66,6 +67,9 @@ export const AdminPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Helmet>
+        <title>得否AI工具箱-管理后台</title>
+      </Helmet>
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">

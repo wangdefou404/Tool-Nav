@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import { login } from '../utils/api';
+import { Helmet } from 'react-helmet';
 import './Login.css';
 
 const Login: React.FC = () => {
@@ -29,6 +30,9 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-container" >
+      <Helmet>
+        <title>得否AI工具箱-登录</title>
+      </Helmet>
       <div className="login-box">
         <h2>得否AI工具箱 登录</h2>
         <form onSubmit={handleSubmit}>
