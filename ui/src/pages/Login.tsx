@@ -30,7 +30,7 @@ const Login: React.FC = () => {
   return (
     <div className="login-container" >
       <div className="login-box">
-        <h2>VanNav 登录</h2>
+        <h2>得否AI工具箱 登录</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <input
