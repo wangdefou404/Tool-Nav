@@ -103,6 +103,10 @@ func main() {
 			admin.POST("/catelog", handler.AddCatelogHandler)
 			admin.DELETE("/catelog/:id", handler.DeleteCatelogHandler)
 			admin.PUT("/catelog/:id", handler.UpdateCatelogHandler)
+
+			// 广告设置路由
+			admin.GET("/ads/settings", handler.GetAdsSettingsHandler)
+			admin.PUT("/ads/settings", handler.UpdateAdsSettingsHandler)
 		}
 	}
 	logger.LogInfo("应用启动成功，网址: http://localhost:%s", *port)

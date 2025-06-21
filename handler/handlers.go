@@ -468,6 +468,42 @@ func ManifastHanlder(c *gin.Context) {
 	})
 }
 
+// 获取广告设置
+func GetAdsSettingsHandler(c *gin.Context) {
+	adsSettings := service.GetAdsSettings()
+	c.JSON(200, gin.H{
+		"success": true,
+		"data":    adsSettings,
+	})
+}
+
+// 更新广告设置
+func UpdateAdsSettingsHandler(c *gin.Context) {
+	var data types.AdsSettings
+	if err := c.ShouldBindJSON(&data); err != nil {
+		utils.CheckErr(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success":      false,
+			"errorMessage": err.Error(),
+		})
+		return
+	}
+	logger.LogInfo("更新广告设置: %+v", data)
+	err := service.UpdateAdsSettings(data)
+	if err != nil {
+		utils.CheckErr(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success":      false,
+			"errorMessage": err.Error(),
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"success": true,
+		"message": "更新广告设置成功",
+	})
+}
+
 func UpdateToolsSortHandler(c *gin.Context) {
 	var updates []types.UpdateToolsSortDto
 	if err := c.ShouldBindJSON(&updates); err != nil {

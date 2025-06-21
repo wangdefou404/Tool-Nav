@@ -14,6 +14,7 @@ const Login = React.lazy(() => import('./pages/Login'));
 const Tools = React.lazy(() => import('./pages/admin/tabs/Tools').then(module => ({ default: module.Tools })));
 const Catelog = React.lazy(() => import('./pages/admin/tabs/Catelog').then(module => ({ default: module.Catelog })));
 const ApiToken = React.lazy(() => import('./pages/admin/tabs/ApiToken').then(module => ({ default: module.ApiToken })));
+const AdsPage = React.lazy(() => import('./pages/admin/tabs/Ads').then(module => ({ default: module.AdsPage })));
 const Setting = React.lazy(() => import('./pages/admin/tabs/Setting').then(module => ({ default: module.Setting })));
 
 // 加载中的占位组件
@@ -72,6 +73,7 @@ function App() {
               <Route path="tools" element={<Tools />} />
               <Route path="categories" element={<Catelog />} />
               <Route path="api-token" element={<ApiToken />} />
+              <Route path="ads" element={<AdsPage />} />
               <Route path="settings" element={<Setting />} />
             </Route>
           </Routes>

@@ -189,5 +189,26 @@ func InitDB() {
 		utils.CheckErr(err)
 	}
 	rows.Close()
+	
+	// 广告设置表
+	sql_create_table = `
+		CREATE TABLE IF NOT EXISTS nav_ads_settings (
+			id INTEGER PRIMARY KEY,
+			google_adsense_enabled BOOLEAN DEFAULT 0,
+			google_adsense_publisher_id TEXT DEFAULT '',
+			google_adsense_ad_slot TEXT DEFAULT '',
+			google_adsense_auto_ads_code TEXT DEFAULT '',
+			google_analytics_enabled BOOLEAN DEFAULT 0,
+			google_analytics_tracking_id TEXT DEFAULT '',
+			google_analytics_gtm_code TEXT DEFAULT '',
+			custom_ads_enabled BOOLEAN DEFAULT 0,
+			custom_ads_header_code TEXT DEFAULT '',
+			custom_ads_footer_code TEXT DEFAULT '',
+			custom_ads_sidebar_code TEXT DEFAULT ''
+		);
+		`
+	_, err = DB.Exec(sql_create_table)
+	utils.CheckErr(err)
+	
 	logger.LogInfo("数据库初始化成功💗")
 }

@@ -48,3 +48,34 @@ type Catelog struct {
 	Sort int    `json:"sort"`
 	Hide bool   `json:"hide"`
 }
+
+// Google AdSense 设置
+type GoogleAdsense struct {
+	Enabled     bool   `json:"enabled"`
+	PublisherId string `json:"publisherId"`
+	AdSlot      string `json:"adSlot"`
+	AutoAdsCode string `json:"autoAdsCode"`
+}
+
+// Google Analytics 设置
+type GoogleAnalytics struct {
+	Enabled    bool   `json:"enabled"`
+	TrackingId string `json:"trackingId"`
+	GtmCode    string `json:"gtmCode"`
+}
+
+// 自定义广告设置
+type CustomAds struct {
+	Enabled     bool   `json:"enabled"`
+	HeaderCode  string `json:"headerCode"`
+	FooterCode  string `json:"footerCode"`
+	SidebarCode string `json:"sidebarCode"`
+}
+
+// 广告设置
+type AdsSettings struct {
+	Id              int             `json:"id"`
+	GoogleAdsense   GoogleAdsense   `json:"googleAdsense"`
+	GoogleAnalytics GoogleAnalytics `json:"googleAnalytics"`
+	CustomAds       CustomAds       `json:"customAds"`
+}
