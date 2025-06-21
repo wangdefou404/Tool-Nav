@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
-  title: Van Nav API
-  description: Van Nav 导航系统的 API 文档
+  title: 得否AI工具箱 API
+  description: 得否AI工具箱 导航系统的 API 文档
   version: 1.0.0
 
 servers:

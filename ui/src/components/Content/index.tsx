@@ -183,7 +183,7 @@ const Content = (props: any) => {
             data?.setting?.favicon ?? "favicon.ico"
           }
         />
-        <title>{data?.setting?.title ?? "Van Nav"}</title>
+        <title>{data?.setting?.title ?? "得否AI工具箱"}</title>
       </Helmet>
       <div className="topbar">
         <div className="content">

@@ -178,7 +178,7 @@ func InitDB() {
 			`
 		stmt, err := DB.Prepare(sql_add_setting)
 		utils.CheckErr(err)
-		res, err := stmt.Exec("favicon.ico", "Van Nav", "", "logo192.png", "logo512.png", false, false, true)
+		res, err := stmt.Exec("favicon.ico", "得否AI工具箱", "", "logo192.png", "logo512.png", false, false, true)
 		utils.CheckErr(err)
 		_, err = res.LastInsertId()
 		utils.CheckErr(err)

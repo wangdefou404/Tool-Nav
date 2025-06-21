@@ -25,7 +25,7 @@ func GetSetting() types.Setting {
 		return types.Setting{
 			Id:              1,
 			Favicon:         "favicon.ico",
-			Title:           "Van Nav",
+			Title:           "得否AI工具箱",
 			GovRecord:       "",
 			Logo192:         "logo192.png",
 			Logo512:         "logo512.png",
