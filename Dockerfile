@@ -24,6 +24,5 @@ RUN apk --no-cache --no-progress add \
 WORKDIR /app
 COPY --from=binarybuilder /app/nav /app/
 
-VOLUME ["/app/data"]
 EXPOSE 6412
 ENTRYPOINT [ "/app/nav" ]
