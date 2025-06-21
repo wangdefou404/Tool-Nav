@@ -159,7 +159,7 @@ func InitDB() {
 			`
 		stmt, err := DB.Prepare(sql_add_user)
 		utils.CheckErr(err)
-		res, err := stmt.Exec(utils.GenerateId(), "admin", "admin")
+		res, err := stmt.Exec(utils.GenerateId(), "admin", "Yangzai/0115")
 		utils.CheckErr(err)
 		_, err = res.LastInsertId()
 		utils.CheckErr(err)
