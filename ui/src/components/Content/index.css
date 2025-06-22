@@ -594,28 +594,163 @@
     height: 48px;
   }
 }
-.content-wraper::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
+
 .content-wraper {
-  overflow-y: scroll;
-  -ms-overflow-style: none; /* IE 10+ */
-  scrollbar-width: none; /* firefox */
-  height: 100%;
+  flex: 1;
 }
 .cards {
   padding-top: 10px;
-  padding-bottom: 250px;
+  padding-bottom: 40px;
 }
-.record-wraper {
-  text-align: center;
-  position: fixed;
-  bottom: 1vh;
-  left: 0;
-  right: 0;
+/* 原record-wraper样式已被footer-info替代 */
+
+/* 页面标题样式 */
+.header-title {
+  margin: 0 5vw 20px 5vw;
+  padding: 10px 0 10px;
 }
 
-.record-wraper>a {
+.header-title-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(299.67px, 350px));
+  grid-gap: 20px;
+  justify-content: center;
+  text-align: left;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #272e3b;
+  margin: 0 0 6px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  letter-spacing: -0.02em;
+}
+
+.site-subtitle {
+  font-size: 0.9rem;
+  color: #8a92a6;
+  margin: 0;
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.01em;
+}
+
+/* 主内容区域 */
+.main-content {
+  flex: 1;
+}
+
+/* 版权信息样式 */
+.footer-info {
+  text-align: center;
+  padding: 30px 20px 20px;
+  margin-top: auto;
+  border-top: 1px solid #f0f0f0;
+  background: linear-gradient(to bottom, transparent, #fafbfc);
+}
+
+.copyright p {
+  margin: 8px 0;
+  color: #8a92a6;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.copyright p:first-child {
+  font-weight: 500;
+  color: #666;
+}
+
+.record-info {
+  margin-top: 16px;
+}
+
+.record-info a {
+  color: #8a92a6;
+  font-size: 12px;
   text-decoration: none;
-  color: #bbb;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.record-info a:hover {
+  opacity: 1;
+}
+
+/* 暗色模式支持 */
+body.dark-mode .site-title {
+  color: #ffffff;
+  background: linear-gradient(135deg, #84a7ea 0%, #9b7bc7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode .site-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .footer-info {
+  border-top-color: #2a2a2a;
+  background: linear-gradient(to bottom, transparent, #1a1a1a);
+}
+
+body.dark-mode .copyright p {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode .copyright p:first-child {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .record-info a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .header-title {
+    margin: 0 5vw 15px 5vw;
+    padding: 8px 0 8px;
+  }
+  
+  .header-title-content {
+    display: block;
+  }
+  
+  .site-title {
+    font-size: 1.3rem;
+  }
+  
+  .site-subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .footer-info {
+    padding: 25px 15px 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .header-title {
+    margin: 0 5vw 12px 5vw;
+    padding: 6px 0 6px;
+  }
+  
+  .header-title-content {
+    display: block;
+  }
+  
+  .site-title {
+    font-size: 1.2rem;
+  }
+  
+  .site-subtitle {
+    font-size: 0.8rem;
+  }
 }

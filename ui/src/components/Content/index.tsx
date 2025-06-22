@@ -185,29 +185,54 @@ const Content = (props: any) => {
         />
         <title>{data?.setting?.title ?? "得否AI工具箱"}</title>
       </Helmet>
-      <div className="topbar">
-        <div className="content">
-          <SearchBar
-            searchString={val}
-            setSearchText={(t) => {
-              setVal(t);
-              handleSetSearch(t);
-            }}
-          />
-          <TagSelector
-            tags={data?.catelogs ?? ["全部工具"]}
-            currTag={currTag}
-            onTagChange={handleSetCurrTag}
-          />
+      
+      <div className="main-content">
+        {/* 页面标题 */}
+        <div className="header-title">
+          <div className="header-title-content">
+            <div className="title-wrapper">
+              <h1 className="site-title">得否AI工具箱</h1>
+              <p className="site-subtitle">发现最好的AI工具，提升工作效率</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="topbar">
+          <div className="content">
+            <SearchBar
+              searchString={val}
+              setSearchText={(t) => {
+                setVal(t);
+                handleSetSearch(t);
+              }}
+            />
+            <TagSelector
+              tags={data?.catelogs ?? ["全部工具"]}
+              currTag={currTag}
+              onTagChange={handleSetCurrTag}
+            />
+          </div>
+        </div>
+        <div className="content-wraper">
+          <div className="content cards">
+            {loading ? <Loading></Loading> : renderCardsV2()}
+          </div>
         </div>
       </div>
-      <div className="content-wraper">
-        <div className="content cards">
-          {loading ? <Loading></Loading> : renderCardsV2()}
+      
+      {/* 版权信息 */}
+      <div className="footer-info">
+        <div className="copyright">
+          <p>© 2024 得否AI工具箱. All rights reserved.</p>
+          <p>致力于为用户提供最优质的AI工具集合</p>
         </div>
-      </div>
-      <div className="record-wraper">
-        <a href="https://beian.miit.gov.cn" target="_blank" rel="noreferrer">{data?.setting?.govRecord ?? ""}</a>
+        {data?.setting?.govRecord && (
+          <div className="record-info">
+            <a href="https://beian.miit.gov.cn" target="_blank" rel="noreferrer">
+              {data.setting.govRecord}
+            </a>
+          </div>
+        )}
       </div>
       {showGithub && <GithubLink />}
       <DarkSwitch showGithub={showGithub} />
