@@ -723,8 +723,11 @@
 
 /* 深色模式 */
 body.dark-mode .category-title {
-  color: rgba(255, 255, 255, 0.8);
-  border-left-color: #383838;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.dark-mode .category-title::before {
+  background-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 
