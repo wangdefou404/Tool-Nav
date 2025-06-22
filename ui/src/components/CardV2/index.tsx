@@ -33,10 +33,10 @@ const Card = ({ title, url, des, logo, catelog, onClick, index, isSearching }) =
         </div>
         <div className="card-right">
           <div className="card-right-top">
-            <span className="card-right-title" title={title}>{title}</span>
+            <h3 className="card-right-title" title={title}>{title}</h3>
             <span className="card-tag" title={catelog}>{catelog}</span>
           </div>
-          <div className="card-right-bottom" title={des}>{des}</div>
+          <h4 className="card-right-bottom" title={des}>{des}</h4>
         </div>
       </div>
     </a>

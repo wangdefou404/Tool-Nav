@@ -74,6 +74,8 @@ func main() {
 	{
 		// 获取数据的路由
 		api.GET("/", handler.GetAllHandler)
+		// 获取SEO元标签
+		api.GET("/seo/meta", handler.GetSeoMetaHandler)
 		// 获取用户信息
 
 		api.POST("/login", handler.LoginHandler)
@@ -107,6 +109,10 @@ func main() {
 			// 广告设置路由
 			admin.GET("/ads/settings", handler.GetAdsSettingsHandler)
 			admin.PUT("/ads/settings", handler.UpdateAdsSettingsHandler)
+			
+			// SEO设置路由
+			admin.GET("/seo/settings", handler.GetSeoSettingsHandler)
+			admin.PUT("/seo/settings", handler.UpdateSeoSettingsHandler)
 		}
 	}
 	logger.LogInfo("应用启动成功，网址: http://localhost:%s", *port)

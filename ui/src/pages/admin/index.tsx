@@ -10,6 +10,7 @@ import {
   BackpackIcon,
   TableIcon,
   CrumpledPaperIcon,
+  MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
 import { useOnce } from '../../utils/useOnce';
 
@@ -37,6 +38,12 @@ const menuItems: MenuItem[] = [
     icon: <CrumpledPaperIcon className="w-5 h-5" />,
     label: '广告管理',
     path: '/admin/ads'
+  },
+  {
+    key: 'seo',
+    icon: <MagnifyingGlassIcon className="w-5 h-5" />,
+    label: 'SEO设置',
+    path: '/admin/seo'
   },
   {
     key: 'settings',

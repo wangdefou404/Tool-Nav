@@ -84,34 +84,7 @@ const Content = (props: any) => {
 
 
 
-  const filteredData = useMemo(() => {
-    if (data.tools) {
-      const localResult = data.tools
-        .filter((item: any) => {
-          if (currTag === "全部工具") {
-            return true;
-          }
-          return item.catelog === currTag;
-        })
-        .filter((item: any) => {
-          if (searchString === "") {
-            return true;
-          }
-          return (
-            mutiSearch(item.name, searchString) ||
-            mutiSearch(item.desc, searchString) ||
-            mutiSearch(item.url, searchString)
-          );
-        });
-      return [...localResult, ...generateSearchEngineCard(searchString)]
-    } else {
-      return [...generateSearchEngineCard(searchString)];
-    }
-  }, [data, currTag, searchString]);
 
-  useEffect(() => {
-    filteredDataRef.current = filteredData
-  }, [filteredData])
 
   useEffect(() => {
     if (searchString.trim() === "") {
@@ -125,30 +98,94 @@ const Content = (props: any) => {
     // eslint-disable-next-line
   }, [searchString])
 
+  // 按分类组织工具数据，但保持原来的布局
+  const organizedData = useMemo(() => {
+    if (!data.tools) return {};
+    
+    const organized: { [key: string]: any[] } = {};
+    
+    // 如果是搜索模式，显示所有匹配的工具在"搜索结果"分类下
+    if (searchString.trim() !== "") {
+      const searchResults = data.tools.filter((item: any) => {
+        return (
+          mutiSearch(item.name, searchString) ||
+          mutiSearch(item.desc, searchString) ||
+          mutiSearch(item.url, searchString)
+        );
+      });
+      if (searchResults.length > 0) {
+        organized["搜索结果"] = [...searchResults, ...generateSearchEngineCard(searchString)];
+      } else {
+        organized["搜索结果"] = generateSearchEngineCard(searchString);
+      }
+      return organized;
+    }
+    
+    // 如果选择了特定分类，只显示该分类
+    if (currTag !== "全部工具") {
+      const categoryTools = data.tools.filter((item: any) => item.catelog === currTag);
+      if (categoryTools.length > 0) {
+        organized[currTag] = categoryTools;
+      }
+      return organized;
+    }
+    
+    // 显示全部工具时，按分类组织
+    data.tools.forEach((item: any) => {
+      const category = item.catelog || "未分类";
+      if (!organized[category]) {
+        organized[category] = [];
+      }
+      organized[category].push(item);
+    });
+    
+    return organized;
+  }, [data, currTag, searchString]);
+
+  useEffect(() => {
+    // 将组织化的数据展平为数组，用于键盘导航
+    const flatData: any[] = [];
+    Object.values(organizedData).forEach((tools: any[]) => {
+      flatData.push(...tools);
+    });
+    filteredDataRef.current = flatData;
+  }, [organizedData]);
+
   const renderCardsV2 = useCallback(() => {
-    return filteredData.map((item, index) => {
+    const categories = Object.keys(organizedData);
+    
+    return categories.map((category) => {
+      const tools = organizedData[category];
+      
       return (
-        <CardV2
-          title={item.name}
-          url={item.url}
-          des={item.desc}
-          logo={item.logo}
-          key={item.id}
-          catelog={item.catelog}
-          index={index}
-          isSearching={searchString.trim() !== ""}
-          onClick={() => {
-            resetSearch();
-            if (item.url === "toggleJumpTarget") {
-              toggleJumpTarget();
-              loadData();
-            }
-          }}
-        />
+        <div key={category} className="category-section">
+          <h2 className="category-title">{category}</h2>
+          <div className="category-tools">
+            {tools.map((item, index) => (
+              <CardV2
+                title={item.name}
+                url={item.url}
+                des={item.desc}
+                logo={item.logo}
+                key={item.id || `${category}-${index}`}
+                catelog={item.catelog}
+                index={index}
+                isSearching={searchString.trim() !== ""}
+                onClick={() => {
+                  resetSearch();
+                  if (item.url === "toggleJumpTarget") {
+                    toggleJumpTarget();
+                    loadData();
+                  }
+                }}
+              />
+            ))}
+          </div>
+        </div>
       );
     });
     // eslint-disable-next-line
-  }, [filteredData, searchString]);
+  }, [organizedData, searchString]);
 
   const onKeyEnter = (ev: KeyboardEvent) => {
     const cards = filteredDataRef.current;
@@ -214,7 +251,7 @@ const Content = (props: any) => {
           </div>
         </div>
         <div className="content-wraper">
-          <div className="content cards">
+          <div className="categories-container">
             {loading ? <Loading></Loading> : renderCardsV2()}
           </div>
         </div>

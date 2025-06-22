@@ -530,3 +530,56 @@ func UpdateToolsSortHandler(c *gin.Context) {
 		"message": "更新排序成功",
 	})
 }
+
+// 获取SEO设置
+func GetSeoSettingsHandler(c *gin.Context) {
+	seoSettings, err := service.GetSeoSettings()
+	if err != nil {
+		utils.CheckErr(err)
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"success":      false,
+			"errorMessage": err.Error(),
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"success": true,
+		"data":    seoSettings,
+	})
+}
+
+// 更新SEO设置
+func UpdateSeoSettingsHandler(c *gin.Context) {
+	var data types.SeoSettings
+	if err := c.ShouldBindJSON(&data); err != nil {
+		utils.CheckErr(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success":      false,
+			"errorMessage": err.Error(),
+		})
+		return
+	}
+	logger.LogInfo("更新SEO设置: %+v", data)
+	err := service.UpdateSeoSettings(&data)
+	if err != nil {
+		utils.CheckErr(err)
+		c.JSON(http.StatusBadRequest, gin.H{
+			"success":      false,
+			"errorMessage": err.Error(),
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"success": true,
+		"message": "更新SEO设置成功",
+	})
+}
+
+// 获取SEO元标签（用于前端渲染）
+func GetSeoMetaHandler(c *gin.Context) {
+	seoMeta := service.GetEnabledSeoMeta()
+	c.JSON(200, gin.H{
+		"success": true,
+		"data":    seoMeta,
+	})
+}

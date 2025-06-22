@@ -42,11 +42,8 @@ export const FetchList = async () => {
     if (!data.tools) {
         data.tools = []
     }
-    data.tools.forEach(item => {
-        if (!catelogs.includes(item.catelog)) {
-            catelogs.push(item.catelog);
-        }
-    });
+    // 完全依赖后端返回的已过滤分类列表
+    // 不再动态添加工具的分类，避免隐藏分类重新显示
     if (!data.setting?.hideAdmin) {
         data.tools.push({
             id: 999999999999,
@@ -65,7 +62,7 @@ export const FetchList = async () => {
 
     data.tools.push({
         id: 999099999978,
-        catelogs: "偏好设置",
+        catelog: "偏好设置",
         name: jumpTarget === "blank" ? "新建窗口" : "原地跳转",
         desc: `点击切换跳转方式`,
         url: "toggleJumpTarget",

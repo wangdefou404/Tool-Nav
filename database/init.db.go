@@ -210,5 +210,30 @@ func InitDB() {
 	_, err = DB.Exec(sql_create_table)
 	utils.CheckErr(err)
 	
+	// SEO设置表
+	sql_create_table = `
+		CREATE TABLE IF NOT EXISTS nav_seo_settings (
+			id INTEGER PRIMARY KEY,
+			title TEXT DEFAULT '',
+			description TEXT DEFAULT '',
+			keywords TEXT DEFAULT '',
+			author TEXT DEFAULT '',
+			og_title TEXT DEFAULT '',
+			og_description TEXT DEFAULT '',
+			og_image TEXT DEFAULT '',
+			og_url TEXT DEFAULT '',
+			twitter_card TEXT DEFAULT '',
+			twitter_site TEXT DEFAULT '',
+			twitter_creator TEXT DEFAULT '',
+			canonical TEXT DEFAULT '',
+			robots TEXT DEFAULT 'index,follow',
+			google_site_verification TEXT DEFAULT '',
+			baidu_site_verification TEXT DEFAULT '',
+			bing_site_verification TEXT DEFAULT ''
+		);
+		`
+	_, err = DB.Exec(sql_create_table)
+	utils.CheckErr(err)
+	
 	logger.LogInfo("数据库初始化成功💗")
 }

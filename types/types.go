@@ -79,3 +79,24 @@ type AdsSettings struct {
 	GoogleAnalytics GoogleAnalytics `json:"googleAnalytics"`
 	CustomAds       CustomAds       `json:"customAds"`
 }
+
+// SEO设置
+type SeoSettings struct {
+	Id              int    `json:"id"`
+	Title           string `json:"title"`
+	Description     string `json:"description"`
+	Keywords        string `json:"keywords"`
+	Author          string `json:"author"`
+	OgTitle         string `json:"ogTitle"`
+	OgDescription   string `json:"ogDescription"`
+	OgImage         string `json:"ogImage"`
+	OgUrl           string `json:"ogUrl"`
+	TwitterCard     string `json:"twitterCard"`
+	TwitterSite     string `json:"twitterSite"`
+	TwitterCreator  string `json:"twitterCreator"`
+	Canonical       string `json:"canonical"`
+	Robots          string `json:"robots"`
+	GoogleSiteVerification string `json:"googleSiteVerification"`
+	BaiduSiteVerification  string `json:"baiduSiteVerification"`
+	BingSiteVerification   string `json:"bingSiteVerification"`
+}

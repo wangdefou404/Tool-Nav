@@ -4,6 +4,13 @@
   border: 1px solid #979797;
   transition: all 0.3s;
   box-sizing: border-box;
+  margin: 0 !important;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: normal;
+  display: inline-block;
+  border-radius: 20px;
+  background-color: #ffffff;
 }
 .select-tag:hover {
   border: 1px solid #969696;
@@ -17,4 +24,9 @@
 }
 .tag-selector {
   width: 100%;
+}
+.tag-selector-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }

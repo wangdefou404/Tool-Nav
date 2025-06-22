@@ -16,3 +16,20 @@
 body.dark-mode .card-index {
     color: rgba(255,255,255, 0.6)
 }
+
+/* 重置H3和H4标签的默认样式，保持原有视觉效果 */
+.card-right-title {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.card-right-bottom {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
