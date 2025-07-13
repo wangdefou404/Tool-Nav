@@ -968,7 +968,7 @@ body.dark-mode .clear-search-button {
 
 /* 搜索区域 */
 .search-section {
-  max-width: 800px;
+  max-width: 1090px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1015,6 +1015,13 @@ body.dark-mode .hero-subtitle {
 }
 
 /* 响应式设计 */
+@media (max-width: 1060px) and (min-width: 769px) {
+  .search-section {
+    max-width: 90vw;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 768px) {
   .page-header {
     padding: 40px 16px 32px;
