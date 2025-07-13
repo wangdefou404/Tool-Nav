@@ -1,31 +1,58 @@
-.lds-ring {
-  display: inline-block;
+/* 现代化加载组件样式 */
+.loading-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
 }
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
+
+.spinner-circle {
   position: absolute;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border: 5px solid #272e3b;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #0ea5e9;
   border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #272e3b transparent transparent transparent;
+  animation: spin 1.2s linear infinite;
 }
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+
+.spinner-circle:nth-child(1) {
+  animation-delay: 0s;
 }
-.lds-ring div:nth-child(2) {
+
+.spinner-circle:nth-child(2) {
   animation-delay: -0.3s;
+  border-top-color: #38bdf8;
+  transform: scale(0.8);
 }
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+
+.spinner-circle:nth-child(3) {
+  animation-delay: -0.6s;
+  border-top-color: #7dd3fc;
+  transform: scale(0.6);
 }
-@keyframes lds-ring {
+
+.spinner-circle:nth-child(4) {
+  animation-delay: -0.9s;
+  border-top-color: #bae6fd;
+  transform: scale(0.4);
+}
+
+@keyframes spin {
   0% {
     transform: rotate(0deg);
   }
@@ -33,9 +60,42 @@
     transform: rotate(360deg);
   }
 }
-.loading {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.loading-text {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  opacity: 0.8;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* 暗色模式支持 */
+body.dark-mode .loading-text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .spinner-circle {
+  border-top-color: #84a7ea;
+}
+
+body.dark-mode .spinner-circle:nth-child(2) {
+  border-top-color: #9b7bc7;
+}
+
+body.dark-mode .spinner-circle:nth-child(3) {
+  border-top-color: #b4a5d4;
+}
+
+body.dark-mode .spinner-circle:nth-child(4) {
+  border-top-color: #cdc8e1;
 }

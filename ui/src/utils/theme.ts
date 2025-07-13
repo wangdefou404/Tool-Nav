@@ -25,12 +25,14 @@ export const applyTheme = (t: string, source: string, disableLog: boolean) => {
   if (t.includes("light")) {
     const bodyEl = document.querySelector("body")!;
     bodyEl.classList.toggle("dark-mode", false);
+    bodyEl.classList.toggle("dark", false);
     if (!disableLog) {
       console.log(`[Apply Theme][${source}] ${t}`);
     }
   } else {
     const bodyEl = document.querySelector("body")!;
     bodyEl.classList.toggle("dark-mode", true);
+    bodyEl.classList.toggle("dark", true);
     if (!disableLog) {
       console.log(`[Apply Theme][${source}] ${t}`);
     }

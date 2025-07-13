@@ -1,7 +1,292 @@
+/* ========= 全新的搜索框设计 ========= */
 
-.search input{
+.search-bar-modern {
+  width: 100%;
+  max-width: 100%;
+}
 
-    width: 100%;
-    transition: all .3s;
+/* 搜索输入容器 */
+.search-input-container {
+  position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 10px 25px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.search-input-container:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.search-input-container:focus-within {
+  border-color: #6366f1;
+  box-shadow: 
+    0 0 0 3px rgba(99, 102, 241, 0.1),
+    0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* 搜索图标 */
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 搜索输入框 */
+.search-input {
+  width: 100%;
+  height: 60px;
+  padding: 0 50px 0 50px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+  outline: none;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+/* 快捷键提示 */
+.search-shortcuts {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.shortcut-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background: rgba(243, 244, 246, 0.8);
+  border: 1px solid rgba(209, 213, 219, 0.6);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+  color: #6b7280;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 清除按钮 */
+.clear-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(107, 114, 128, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background: rgba(107, 114, 128, 0.15);
+  color: #374151;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.clear-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* 搜索结果提示 */
+.search-results-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.hint-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hint-item kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  background: rgba(243, 244, 246, 0.8);
+  border: 1px solid rgba(209, 213, 219, 0.6);
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+  color: #4b5563;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 暗色模式支持 */
+body.dark .search-input-container,
+body.dark-mode .search-input-container {
+  background: rgba(31, 41, 55, 0.95);
+  border-color: rgba(75, 85, 99, 0.6);
+}
+
+body.dark .search-input-container:hover,
+body.dark-mode .search-input-container:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+}
+
+body.dark .search-input-container:focus-within,
+body.dark-mode .search-input-container:focus-within {
+  border-color: #8b5cf6;
+  box-shadow: 
+    0 0 0 3px rgba(139, 92, 246, 0.1),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .search-input,
+body.dark-mode .search-input {
+  color: #f9fafb;
+}
+
+body.dark .search-input::placeholder,
+body.dark-mode .search-input::placeholder {
+  color: #6b7280;
+}
+
+body.dark .shortcut-key,
+body.dark-mode .shortcut-key {
+  background: rgba(55, 65, 81, 0.8);
+  border-color: rgba(75, 85, 99, 0.6);
+  color: #9ca3af;
+}
+
+body.dark .clear-button,
+body.dark-mode .clear-button {
+  background: rgba(107, 114, 128, 0.15);
+  color: #9ca3af;
+}
+
+body.dark .clear-button:hover,
+body.dark-mode .clear-button:hover {
+  background: rgba(107, 114, 128, 0.25);
+  color: #d1d5db;
+}
+
+body.dark .search-results-hint,
+body.dark-mode .search-results-hint {
+  color: #9ca3af;
+}
+
+body.dark .hint-item kbd,
+body.dark-mode .hint-item kbd {
+  background: rgba(55, 65, 81, 0.8);
+  border-color: rgba(75, 85, 99, 0.6);
+  color: #9ca3af;
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .search-input {
+    height: 56px;
+    padding: 0 44px 0 44px;
+    font-size: 15px;
+  }
   
+  .search-icon {
+    left: 14px;
+  }
+  
+  .search-shortcuts {
+    right: 14px;
+  }
+  
+  .clear-button {
+    right: 10px;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .shortcut-key {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  
+  .search-results-hint {
+    gap: 16px;
+    font-size: 12px;
+  }
+  
+  .hint-item kbd {
+    padding: 2px 5px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input {
+    height: 52px;
+    padding: 0 40px 0 40px;
+    font-size: 14px;
+  }
+  
+  .search-icon {
+    left: 12px;
+  }
+  
+  .search-shortcuts {
+    right: 12px;
+  }
+  
+  .clear-button {
+    right: 8px;
+    width: 26px;
+    height: 26px;
+  }
+  
+  .search-results-hint {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+}
+
+/* 旧样式移除标记 */
+.search input,
+.search-modern-new,
+.search-modern,
+.search-container {
+  /* 这些旧类将被移除 */
 }

@@ -1,3 +1,4 @@
+/* 卡片组件的额外样式 */
 .select-tag {
     user-select: none;
 }
@@ -13,8 +14,21 @@
     color: #272e3b;
 }
 
+/* 暗色模式支持 */
 body.dark-mode .card-index {
     color: rgba(255,255,255, 0.6)
+}
+
+/* 卡片暗色模式样式 */
+body.dark-mode .card-modern {
+    background-color: #1f2937 !important;
+    border-color: #374151 !important;
+    color: #f9fafb !important;
+}
+
+body.dark-mode .card-modern:hover {
+    background-color: #111827 !important;
+    border-color: #4b5563 !important;
 }
 
 /* 占位图标暗色模式支持 */
