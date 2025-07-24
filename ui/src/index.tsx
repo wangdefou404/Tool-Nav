@@ -11,9 +11,7 @@ console.log("项目地址: https://github.com/mereithhh/van-nav")
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <App />
 );
 
 serviceWorker.register(null);

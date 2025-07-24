@@ -63,12 +63,16 @@ const Card = ({ title, url, des, logo, catelog, onClick, index, isSearching }: C
         />
       );
     } else {
-      if (imageError) {
+      if (imageError || !logo) {
+        return defaultIcon;
+      }
+      const logoUrl = getLogoUrl(logo);
+      if (!logoUrl) {
         return defaultIcon;
       }
       return (
         <img 
-          src={getLogoUrl(logo)} 
+          src={logoUrl} 
           alt={title} 
           className="w-12 h-12 rounded-lg object-cover transition-transform duration-200 group-hover:scale-110"
           onError={() => setImageError(true)}

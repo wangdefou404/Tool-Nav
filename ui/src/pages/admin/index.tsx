@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ExitIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { MenuItem, Sidebar } from './components/sidebar';
-import { Helmet } from 'react-helmet';
+import { SafeHelmet as Helmet } from '../../components/HelmetProvider';
 import "./index.css"
 import {
   HomeIcon,
@@ -128,4 +128,4 @@ export const AdminPage = () => {
   );
 };
 
-export default AdminPage; 
+export default AdminPage;

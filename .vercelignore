@@ -1,0 +1,17 @@
+node_modules
+build
+dist
+.git
+.trae
+.log
+.next
+.cache
+ui/node_modules
+next-app/node_modules
+ui/.cache
+next-app/.cache
+ui/build
+ui/dist
+scripts/*.json
+*.log
+.DS_Store

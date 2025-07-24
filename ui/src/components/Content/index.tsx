@@ -2,7 +2,7 @@ import "./index.css";
 import CardV2 from "../CardV2";
 import SearchBar from "../SearchBar";
 import { Loading } from "../Loading";
-import { Helmet } from "react-helmet";
+import { SafeHelmet as Helmet } from "../HelmetProvider";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FetchList } from "../../utils/api";
 import TagSelector from "../TagSelector";
@@ -103,6 +103,28 @@ const Content = (props: any) => {
     // eslint-disable-next-line
   }, [searchString])
 
+  // 获取分类名称的辅助函数
+  const getCategoryName = useCallback((catelogId: string | number) => {
+    if (!data.catelogs) return "未分类";
+    
+    // 如果是字符串且不是数字，直接返回
+    if (typeof catelogId === 'string' && isNaN(Number(catelogId))) {
+      return catelogId;
+    }
+    
+    // 转换为数字进行查找
+    const id = Number(catelogId);
+    if (isNaN(id)) return "未分类";
+    
+    // 在分类数组中查找对应的分类名称
+    // data.catelogs[0] 是 "全部工具"，从索引1开始是实际分类
+    if (id >= 1 && id < data.catelogs.length) {
+      return data.catelogs[id];
+    }
+    
+    return "未分类";
+  }, [data.catelogs]);
+
   // 按分类组织工具数据，但保持原来的布局
   const organizedData = useMemo(() => {
     if (!data.tools) return {};
@@ -117,7 +139,10 @@ const Content = (props: any) => {
           mutiSearch(item.desc, searchString) ||
           mutiSearch(item.url, searchString)
         );
-      });
+      }).map((item: any) => ({
+        ...item,
+        catelogName: getCategoryName(item.catelog)
+      }));
       if (searchResults.length > 0) {
         organized["搜索结果"] = [...searchResults, ...generateSearchEngineCard(searchString)];
       } else {
@@ -128,7 +153,13 @@ const Content = (props: any) => {
     
     // 如果选择了特定分类，只显示该分类
     if (currTag !== "全部工具") {
-      const categoryTools = data.tools.filter((item: any) => item.catelog === currTag);
+      const categoryTools = data.tools.filter((item: any) => {
+        const categoryName = getCategoryName(item.catelog);
+        return categoryName === currTag;
+      }).map((item: any) => ({
+        ...item,
+        catelogName: getCategoryName(item.catelog)
+      }));
       if (categoryTools.length > 0) {
         organized[currTag] = categoryTools;
       }
@@ -137,15 +168,18 @@ const Content = (props: any) => {
     
     // 显示全部工具时，按分类组织
     data.tools.forEach((item: any) => {
-      const category = item.catelog || "未分类";
-      if (!organized[category]) {
-        organized[category] = [];
+      const categoryName = getCategoryName(item.catelog);
+      if (!organized[categoryName]) {
+        organized[categoryName] = [];
       }
-      organized[category].push(item);
+      organized[categoryName].push({
+        ...item,
+        catelogName: categoryName
+      });
     });
     
     return organized;
-  }, [data, currTag, searchString]);
+  }, [data, currTag, searchString, getCategoryName]);
 
   useEffect(() => {
     // 将组织化的数据展平为数组，用于键盘导航
@@ -201,7 +235,7 @@ const Content = (props: any) => {
                 des={item.desc}
                 logo={item.logo}
                 key={item.id || `${category}-${index}`}
-                catelog={item.catelog}
+                catelog={item.catelogName || getCategoryName(item.catelog)}
                 index={index}
                 isSearching={searchString.trim() !== ""}
                 onClick={() => {

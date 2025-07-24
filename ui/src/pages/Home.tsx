@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { SafeHelmet as Helmet } from '../components/HelmetProvider';
 import Content from '../components/Content';
 
 interface SeoMeta {
@@ -103,4 +103,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home; 
+export default Home;

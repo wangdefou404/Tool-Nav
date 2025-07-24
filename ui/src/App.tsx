@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { App as AntApp } from 'antd';
 import { Spin } from 'antd';
 import { decodeTheme, initTheme } from './utils/theme';
+import { HelmetProvider } from './components/HelmetProvider';
 import './App.css';
 
 // 使用 React.lazy 懒加载组件
@@ -56,32 +57,36 @@ const LoadingFallback = () => {
       backgroundColor: isDarkMode ? '#121212' : '#ffffff',
       color: isDarkMode ? 'rgba(255, 255, 255, 0.6)' : '#272e3b',
     }}>
-      <Spin size="large" tip="加载中..." />
+      <Spin size="large" tip="加载中...">
+        <div style={{ minHeight: '200px' }} />
+      </Spin>
     </div>
   );
 };
 
 function App() {
   return (
-    <AntApp>
-      <Router>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<AdminPage />}>
-              <Route index element={<Tools />} />
-              <Route path="tools" element={<Tools />} />
-              <Route path="categories" element={<Catelog />} />
-              <Route path="api-token" element={<ApiToken />} />
-              <Route path="ads" element={<AdsPage />} />
-              <Route path="seo" element={<SeoTab />} />
-              <Route path="settings" element={<Setting />} />
-            </Route>
-          </Routes>
-        </Suspense>
-      </Router>
-    </AntApp>
+    <HelmetProvider>
+      <AntApp>
+        <Router>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/admin" element={<AdminPage />}>
+                <Route index element={<Tools />} />
+                <Route path="tools" element={<Tools />} />
+                <Route path="categories" element={<Catelog />} />
+                <Route path="api-token" element={<ApiToken />} />
+                <Route path="ads" element={<AdsPage />} />
+                <Route path="seo" element={<SeoTab />} />
+                <Route path="settings" element={<Setting />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </Router>
+      </AntApp>
+    </HelmetProvider>
   );
 }
 
